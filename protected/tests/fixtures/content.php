@@ -1,0 +1,31 @@
+<?php
+return array(
+'Content_1' => array(
+	'ID' =>'2',
+	'lang' =>'ru',
+	'author' =>'1',
+	'state' =>'create',
+	'visible' =>'all',
+	'config' =>NULL,
+	'title' =>'Title1',
+	'text' =>'Tesxt dhfg skdfg ksdfgkshdf lghsldfh glsdfh glsdfg sdfg',
+	'parent' =>'0',
+	'url' =>'title3',
+	'create' =>'2013-02-05 14:37:36',
+	'update' =>'2013-02-05 14:38:40',
+),
+'Content_2' => array(
+	'ID' =>'3',
+	'lang' =>'ru',
+	'author' =>'1',
+	'state' =>'create',
+	'visible' =>'all',
+	'config' =>NULL,
+	'title' =>'Second content page',
+	'text' =>'This is second content page in base',
+	'parent' =>'0',
+	'url' =>'second_content_page',
+	'create' =>'2013-03-15 18:32:00',
+	'update' =>'2013-03-15 18:33:28',
+),
+);
