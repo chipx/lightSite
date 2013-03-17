@@ -1,3 +1,6 @@
 assets
 protected/config/*.php
 protected/runtime/*
+#разрешить добавление в git default файлы
+!assets/default
+!protected/runtime/default
