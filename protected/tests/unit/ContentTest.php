@@ -7,14 +7,16 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class ContentTest extends PHPUnit_Framework_TestCase
+class ContentTest extends CDbTestCase
 {
     public $fixtures = [
-
+        'content'   => 'Content',
+        'comments'  => 'Comments'
     ];
 
     public function testCreate()
     {
+
         $this->assertTrue(true);
     }
 }
