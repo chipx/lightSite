@@ -161,4 +161,15 @@ class Content extends CActiveRecord
         return $str;
     }
 
+    public function behaviors()
+    {
+        return [
+            'comments' => 'CommentsLinked'
+        ];
+    }
+
+    public function getLinkType()
+    {
+        return $this->tableName();
+    }
 }
