@@ -17,7 +17,7 @@
  * @property string $create
  * @property string $update
  */
-class Content extends CActiveRecord
+class Content extends CActiveRecord implements Linked
 {
 	/**
 	 * Returns the static model of the specified AR class.

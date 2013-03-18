@@ -8,7 +8,18 @@ class ContentController extends Controller
 	 */
 	public $layout='//layouts/column2';
 
-	/**
+    public function actions()
+    {
+        return [
+            'comments' => [
+                'class' => 'CommentsLinkedAction',
+                'linkClass' => 'Content'
+            ]
+        ];
+    }
+
+
+    /**
 	 * @return array action filters
 	 */
 	public function filters()
@@ -27,9 +38,7 @@ class ContentController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-                'verbs'=> array('POST')  ,
-                'params' => array('g'=>5),
+				'actions'=>array('index','view', 'comments'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -175,19 +184,5 @@ class ContentController extends Controller
 			Yii::app()->end();
 		}
 	}
-
-    public function commentAction($cmd)
-    {
-
-    }
-
-    public function filterAccessControl($filterChain)
-    {
-        $filter=new MyAccessControlFilter();
-        $filter->setRules($this->accessRules());
-        $filter->filter($filterChain);
-        exit();
-    }
-
 
 }

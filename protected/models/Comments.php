@@ -119,4 +119,15 @@ class Comments extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    protected function beforeValidate()
+    {
+        if ($this->isNewRecord) {
+            $this->state = 'create';
+            $this->create = date('Y-m-d H:i:s');
+        }
+        return parent::beforeValidate();
+    }
+
+
 }

@@ -43,7 +43,6 @@ class MyAccessRule extends CAccessRule
     {
         $result = empty($this->params);
         $request = Yii::app()->getRequest();
-        var_dump($this->verbs);
 
         foreach((array)$this->params as $name => $value) {
             switch($this->verbs) {

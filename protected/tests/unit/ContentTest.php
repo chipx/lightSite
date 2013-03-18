@@ -56,7 +56,14 @@ class ContentTest extends CDbTestCase
         $this->assertTrue($result);
         $this->assertEquals(3, $comment->linkID);
         $this->assertEquals('content', $comment->linkType);
+
+        $comments = $model->getComments();
+        $this->assertCount(3, $comments);
     }
 
+    public function testGetForm()
+    {
+        $model = Content::model()->findByPk(2);
 
+    }
 }

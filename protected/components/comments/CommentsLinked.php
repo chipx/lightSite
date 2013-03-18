@@ -29,7 +29,7 @@ class CommentsLinked extends CActiveRecordBehavior
         $comments = $this->getComments($params);
     }
 
-    private function getLinkData()
+    public function getLinkData()
     {
         return ['linkID' => $this->owner->ID, 'linkType' => $this->owner->linkType];
     }
@@ -50,8 +50,6 @@ class CommentsLinked extends CActiveRecordBehavior
         $link = $this->getLinkData();
         $comment->linkID = $link['linkID'];
         $comment->linkType = $link['linkType'];
-        $comment->state = 'create';
-        $comment->create = date('Y-m-d H:i:s');
         return $comment->save();
     }
 }
