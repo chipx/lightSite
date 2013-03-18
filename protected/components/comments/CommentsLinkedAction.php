@@ -24,11 +24,6 @@ class CommentsLinkedAction extends CAction
         }
     }
 
-    public function cmdTest()
-    {
-        $this->getController()->renderPartial($this->viewDir . DIRECTORY_SEPARATOR . 'test');
-    }
-
     public function cmdList()
     {
         $class = $this->linkClass;
