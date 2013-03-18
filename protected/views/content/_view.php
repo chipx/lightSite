@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var $this ContentController
+ */
+?>
 <div class="view">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('ID')); ?>:</b>
@@ -44,3 +49,4 @@
 	*/ ?>
 
 </div>
+
