@@ -10,9 +10,9 @@ class CommentsLinkedAction extends CAction
         parent::__construct($controller, $id);
     }
 
-    public function run($cmd)
+    public function run($_c)
     {
-        $commandName = 'cmd'.ucfirst($cmd);
+        $commandName = 'cmd'.ucfirst($_c);
         if (empty($this->linkClass)) {
             Yii::log('Класс модели не определен', CLogger::LEVEL_ERROR);
             return;
@@ -26,19 +26,33 @@ class CommentsLinkedAction extends CAction
 
     public function cmdList()
     {
-        $class = $this->linkClass;
         $comments = array();
-        if ($id = Yii::app()->request->getQuery('id', 0)) {
-            if ($model = $class::model()->findByPk($id)) {
-                $comments = $model->getComments();
-            }
-        }
+        $id = Yii::app()->request->getQuery('id', 0);
+        $comments = $this->getLinkModel($id)->getComments();
 
         $this->controller->renderPartial($this->viewDir . DIRECTORY_SEPARATOR . 'list', ['comments' => $comments]);
     }
 
-    public function cmdForm(){
-        $this->controller->widget('CommentsForm', array('model' => $this->model));
+    public function cmdAdd()
+    {
+        $id = Yii::app()->request->getQuery('id', 0);
+
+        $comment = new Comments();
+        $linkData = $this->getLinkModel($id)->getLinkData();
+        $comment['linkID'] = $linkData['linkID'];
+        $comment['linkType'] = $linkData['linkType'];
+
+        $this->controller->widget('CommentsForm', array('model' => $comment));
+    }
+
+    protected function getLinkModel($id)
+    {
+        $class = $this->linkClass;
+        $model = $class::model()->findByPk($id);
+
+        if (!$model) throw new CHttpException(404, 'Not found');
+
+        return $model;
     }
 
     protected function getModel($id = null)

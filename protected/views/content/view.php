@@ -34,6 +34,6 @@ $this->menu=array(
 
 <div id="comments">
     <?php echo CHtml::ajaxLink('Просмотр комментариев',
-        $this->createUrl('comments', ['cmd' => 'list', 'id' => $model->ID]),
+        $this->createUrl('comments', ['_c' => 'list', 'id' => $model->ID]),
         ['update' => '#comments'])?>
 </div>

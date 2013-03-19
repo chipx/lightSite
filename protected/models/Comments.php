@@ -129,5 +129,13 @@ class Comments extends CActiveRecord
         return parent::beforeValidate();
     }
 
-
+    public function getPrepareCreate()
+    {
+        $timestamp = strtotime($this->create);
+        if (date('Y-m-d') == date('Y-m-d', $timestamp)) {
+            return date('H:i', $timestamp);
+        } else {
+            return date("H:i d.m.Y", $timestamp);
+        }
+    }
 }
