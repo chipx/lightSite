@@ -10,6 +10,7 @@
     <?php echo $form->textArea($this->model, 'text')?>
     <?php echo $form->error($this->model, 'text')?>
 </div>
+    <?php echo $form->hiddenField($this->model, 'linkID');?>
     <div class="row">
         <?php echo CHtml::ajaxButton(Yii::t('comment', 'Send'),
                                     $this->getController()->createUrl('', array('cmd' => $this->model->isNewRecord ? 'create' : 'uppdate')))?>

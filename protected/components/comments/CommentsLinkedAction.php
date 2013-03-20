@@ -5,10 +5,6 @@ class CommentsLinkedAction extends CAction
 {
     public $linkClass;
     public $viewDir = 'comments';
-    public function __construct($controller, $id)
-    {
-        parent::__construct($controller, $id);
-    }
 
     public function run($_c)
     {
