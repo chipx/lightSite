@@ -8,16 +8,36 @@
  */
 
 abstract class ParserFeed_Main extends CComponent {
-    protected function getXML($url)
+    protected $_xml;
+
+    public function __construct($xml)
     {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        $data = curl_exec($ch);
-        curl_close($ch);
-        return $data;
+        $this->_xml = $xml;
     }
 
-    abstract public function parse($url, $lastTime);
-
+    abstract public function isNew($dateTtime);
+    /*
+     * Дата последнего обновления
+     */
+    abstract public function getReleased();
+    /*
+     * Язык
+     */
+    abstract public function getLanguage();
+    /*
+     * Заголовок
+     */
+    abstract public function getTitle();
+    /*
+     * Описание
+     */
+    abstract public function getDescription();
+    /*
+     * Иконка канала
+     */
+    abstract public function getImage();
+    /*
+     * Получить элемент
+     */
+    abstract public function getItem();
 }

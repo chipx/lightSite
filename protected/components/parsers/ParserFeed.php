@@ -13,25 +13,38 @@ class ParserFeed extends CComponent {
 
     public function parse(Feeds $feed)
     {
-        $result = [];
-        if ($parser = $this->preparePrser($feed->type_parse)) {
-            $result = $parser->parse($feed->url);
+        $result = null;
+        if ($parser = $this->preparePrser($feed)) {
+            if ($parser->isNew($feed->last_time)) {
+                $result = $parser;
+            }
         }
         return $result;
     }
 
-    protected function preparePrser($name)
+    protected function preparePrser(Feeds $feed)
     {
-        $className = __CLASS__ . ucfirst($name);
+        $className = __CLASS__ . ucfirst($feed->type_parse);
 
         if (!isset($this->_parserTypes[$className]) && file_exists(dirname(__FILE__) . DIRECTORY_SEPARATOR . $className . '.php')) {
-            $this->_parserTypes[$className] = new $className;
+            $this->_parserTypes[$className] = $className;
         }
 
         if (!isset($this->_parserTypes[$className])) {
             Yii::log("Парсер {$className} не найден", CLogger::LEVEL_ERROR);
             return null;
         }
-        return  $this->_parserTypes[$className];
+        return  new $className($this->getXML($feed->url));
     }
+
+    protected function getXML($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return simplexml_load_string($data);
+    }
+
 }

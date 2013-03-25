@@ -20,6 +20,22 @@ class ParserFeedTest extends CDbTestCase {
 
         $result = $parser->parse($feed);
 
-        $this->assertNotEmpty($result);
+        $this->assertNotNull($result);
+
+        $xml = $this->getXml($feed->url);
+
+        $this->assertEquals($xml->channel->title, $result->title);
+        $this->assertEquals($xml->channel->pubDate, $result->released);
+        var_dump($xml->channel->item[0]->description);
+    }
+
+    protected function getXml($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return simplexml_load_string($data);
     }
 }
